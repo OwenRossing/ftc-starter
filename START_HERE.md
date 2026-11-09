@@ -12,19 +12,25 @@ Until then, you run it in a 3D sim of the BIOBUZZ field and drive the **starter 
 
 Changed your code? Press the play button again. The old sim closes, and the page reconnects on its own.
 
-## The starter bot
+## The robot: goBILDA StarterBot
+
+It's the robot the FTC Starter Kit builds (goBILDA 3200-2627-0003), with the same config names as the real one.
 
 | Name in the code | What it is | What it does |
 | --- | --- | --- |
-| `frontLeft`, `frontRight`, `backLeft`, `backRight` | `DcMotor` | The four mecanum wheels |
-| `intake` | `DcMotor` | The roller across the front. Forward picks balls up off the floor (it holds 4) |
-| `shooter` | `DcMotor` | The flywheel on top. It fires forward, the way the robot faces |
-| `gate` | `Servo` | Between the intake and the shooter. `0` is shut, `1` is open |
+| `left_drive`, `right_drive` | `DcMotor` | Each one drives the three wheels on its side. It's a tank drive, so it can't slide sideways |
+| `intake` | `DcMotor` | The green Gecko wheels across the front. Positive power pulls balls in (it holds 4) |
+| `left_intake_servo`, `right_intake_servo` | `CRServo` | Spinning wheels on the front corners. They pull balls out of corners and out of a flower |
+| `launcher` | `DcMotorEx` | The flywheel that throws balls into the Hive. Use `setVelocity()`, in ticks per second |
+| `windmill` | `CRServo` | Pushes balls from the hopper into the launcher, one about every third of a second |
 
-How the balls move: the intake pulls a ball in. With the gate open and the intake still running, balls go up into
-the shooter, one about every third of a second. Spin the shooter up first, or the ball just falls out.
+How the balls move: run the intake to pull a ball in. Spin the launcher up first, then run the windmill to feed
+balls into it. If the launcher isn't up to speed, the ball just falls out. About 1250 ticks/s lands a ball in the
+Hive from where the robot starts.
 
-Like a real robot, the motors on the left side are mounted backwards. You'll find out what that means.
+A `CRServo` (continuous rotation servo) works like a motor: `setPower(1)` spins it one way, `-1` the other.
+
+Like a real robot, one side's motor is mounted backwards. You'll find out what that means.
 
 ## When something goes wrong
 
