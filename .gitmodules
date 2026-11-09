@@ -1,0 +1,3 @@
+[submodule "sim"]
+	path = sim
+	url = https://github.com/OwenRossing/ftc-sim.git

@@ -29,3 +29,17 @@ allprojects {
 repositories {
     mavenCentral()
 }
+
+// Run in Sim: runs TeamCode in the 3D sim in your browser instead of on a robot. The sim is its own build
+// in sim/ (a git submodule), so it can never break the robot build. See START_HERE.md
+tasks.register('runSim', GradleBuild) {
+    group = 'sim'
+    description = 'Runs TeamCode in the 3D sim, in your browser'
+    dir = file('sim')
+    tasks = ['run']
+    doFirst {
+        if (!file('sim/build.gradle').exists()) {
+            throw new GradleException('The sim/ folder is empty. Run: git submodule update --init')
+        }
+    }
+}
