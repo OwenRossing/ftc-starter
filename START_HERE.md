@@ -12,17 +12,20 @@ Until then, you run it in a 3D sim of the BIOBUZZ field and drive the **starter 
 
 Changed your code? Press the play button again. The old sim closes, and the page reconnects on its own.
 
-## The robot: goBILDA StarterBot
+## The robot: goBILDA StarterBot with mecanum wheels
 
-It's the robot the FTC Starter Kit builds (goBILDA 3200-2627-0003), with the same config names as the real one.
+It's goBILDA's StarterBot on mecanum wheels (3200-2627-0004), with the same config names as the real one.
 
 | Name in the code | What it is | What it does |
 | --- | --- | --- |
-| `left_drive`, `right_drive` | `DcMotor` | Each one drives the three wheels on its side. It's a tank drive, so it can't slide sideways |
-| `intake` | `DcMotor` | The green Gecko wheels across the front. Positive power pulls balls in (it holds 4) |
+| `left_front_drive`, `right_front_drive`, `left_back_drive`, `right_back_drive` | `DcMotor` | The four mecanum wheels. Spin them the right ways and the robot slides sideways (strafes) |
+| `intake` | `DcMotor` | The black Gecko wheels across the front. Positive power pulls balls in (it holds 4) |
 | `left_intake_servo`, `right_intake_servo` | `CRServo` | Spinning wheels on the front corners. They pull balls out of corners and out of a flower |
-| `launcher` | `DcMotorEx` | The flywheel that throws balls into the Hive. Use `setVelocity()`, in ticks per second |
-| `windmill` | `CRServo` | Pushes balls from the hopper into the launcher, one about every third of a second |
+| `launcher` | `DcMotorEx` | The wheel that throws balls into the Hive. Use `setVelocity()`, in ticks per second |
+| `windmillServo` | `CRServo` | Pushes balls from the hopper into the launcher, one about every third of a second |
+
+Mecanum driving: forward is all four wheels forward. To strafe right, the front left and back right go forward
+while the other two go backward. To turn right, the left side goes forward and the right side backward.
 
 How the balls move: run the intake to pull a ball in. Spin the launcher up first, then run the windmill to feed
 balls into it. If the launcher isn't up to speed, the ball just falls out. About 1250 ticks/s lands a ball in the
@@ -30,7 +33,7 @@ Hive from where the robot starts.
 
 A `CRServo` (continuous rotation servo) works like a motor: `setPower(1)` spins it one way, `-1` the other.
 
-Like a real robot, one side's motor is mounted backwards. You'll find out what that means.
+Like a real robot, the motors on one side are mounted backwards. You'll find out what that means.
 
 ## When something goes wrong
 
